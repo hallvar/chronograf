@@ -20,24 +20,24 @@ const Dashboard = ({
   templatesIncludingDashTime,
   onSummonOverlayTechnologies,
   onSelectTemplate,
+  updateTempVarValues,
   showTemplateControlBar,
 }) => {
-  if (dashboard.id === 0) {
-    return null
-  }
-
   const cells = dashboard.cells.map(cell => {
     const dashboardCell = {...cell}
-    dashboardCell.queries = dashboardCell.queries.map(
-      ({label, query, queryConfig, db}) => ({
-        label,
-        query,
-        queryConfig,
-        db,
-        database: db,
-        text: query,
-      })
-    )
+    dashboardCell.queries = dashboardCell.queries.map(({
+      label,
+      query,
+      queryConfig,
+      db,
+    }) => ({
+      label,
+      query,
+      queryConfig,
+      db,
+      database: db,
+      text: query,
+    }))
     return dashboardCell
   })
 
@@ -51,9 +51,11 @@ const Dashboard = ({
         {inPresentationMode
           ? null
           : <TemplateControlBar
-              templates={dashboard.templates}
+              source={source}
+              dashboard={dashboard}
               onSelectTemplate={onSelectTemplate}
               onOpenTemplateManager={onOpenTemplateManager}
+              updateTempVarValues={updateTempVarValues}
               isOpen={showTemplateControlBar}
             />}
         {cells.length
@@ -121,6 +123,7 @@ Dashboard.propTypes = {
   timeRange: shape({}).isRequired,
   onOpenTemplateManager: func.isRequired,
   onSelectTemplate: func.isRequired,
+  updateTempVarValues: func.isRequired,
   showTemplateControlBar: bool,
 }
 
