@@ -54,7 +54,7 @@ class DashboardPage extends Component {
     this.handleToggleTempVarControls = ::this.handleToggleTempVarControls
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const {
       params: {dashboardID},
       dashboardActions: {getDashboardsAsync},
