@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 import classnames from 'classnames'
-import {insecureSkipVerifyText} from 'src/shared/copy/tooltipText'
+import {insecureSkipVerifyText} from 'shared/copy/tooltipText'
 import _ from 'lodash'
 
 const {bool, func, shape} = PropTypes
@@ -22,7 +22,7 @@ export const SourceForm = React.createClass({
       name: this.sourceName.value,
       username: this.sourceUsername.value,
       password: this.sourcePassword.value,
-      'default': this.sourceDefault.checked,
+      default: this.sourceDefault.checked,
       telegraf: this.sourceTelegraf.value,
       insecureSkipVerify: this.sourceInsecureSkipVerify
         ? this.sourceInsecureSkipVerify.checked

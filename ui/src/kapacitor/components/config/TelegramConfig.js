@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import QuestionMarkTooltip from 'src/shared/components/QuestionMarkTooltip'
+import QuestionMarkTooltip from 'shared/components/QuestionMarkTooltip'
 import {TELEGRAM_CHAT_ID_TIP, TELEGRAM_TOKEN_TIP} from 'src/kapacitor/copy'
 
 import RedactedInput from './RedactedInput'
@@ -157,7 +157,8 @@ const TelegramConfig = React.createClass({
               ref={r => (this.disableNotification = r)}
             />
             <label htmlFor="disableNotification">
-              Disable notifications on iOS devices and disable sounds on Android devices. Android users continue to receive notifications.
+              Disable notifications on iOS devices and disable sounds on Android
+              devices. Android users continue to receive notifications.
             </label>
           </div>
         </div>

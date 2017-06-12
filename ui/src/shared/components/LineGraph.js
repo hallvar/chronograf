@@ -5,7 +5,7 @@ import shallowCompare from 'react-addons-shallow-compare'
 import _ from 'lodash'
 
 import timeSeriesToDygraph from 'utils/timeSeriesToDygraph'
-import lastValues from 'src/shared/parsing/lastValues'
+import lastValues from 'shared/parsing/lastValues'
 
 const {array, arrayOf, bool, func, number, shape, string} = PropTypes
 
@@ -31,7 +31,11 @@ export default React.createClass({
     }),
     activeQueryIndex: number,
     ruleValues: shape({}),
+    timeRange: shape({
+      lower: string.isRequired,
+    }),
     isInDataExplorer: bool,
+    synchronizer: func,
   },
 
   getDefaultProps() {
@@ -83,7 +87,8 @@ export default React.createClass({
       showSingleStat,
       displayOptions,
       ruleValues,
-      isInDataExplorer,
+      synchronizer,
+      timeRange,
     } = this.props
     const {labels, timeSeries, dygraphSeries} = this._timeSeries
 
@@ -142,10 +147,13 @@ export default React.createClass({
           dygraphSeries={dygraphSeries}
           ranges={ranges || this.getRanges()}
           ruleValues={ruleValues}
-          legendOnBottom={isInDataExplorer}
+          synchronizer={synchronizer}
+          timeRange={timeRange}
         />
         {showSingleStat
-          ? <div className="graph-single-stat single-stat">{roundedValue}</div>
+          ? <div className="graph-single-stat single-stat">
+              <span className="single-stat--value">{roundedValue}</span>
+            </div>
           : null}
       </div>
     )

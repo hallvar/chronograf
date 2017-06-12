@@ -10,10 +10,12 @@ const Dashboard = ({
   dashboard,
   onAddCell,
   onEditCell,
+  timeRange,
   autoRefresh,
   onRenameCell,
   onUpdateCell,
   onDeleteCell,
+  synchronizer,
   onPositionChange,
   inPresentationMode,
   onOpenTemplateManager,
@@ -23,21 +25,22 @@ const Dashboard = ({
   updateTempVarValues,
   showTemplateControlBar,
 }) => {
+  if (!dashboard) {
+    return null
+  }
+
   const cells = dashboard.cells.map(cell => {
     const dashboardCell = {...cell}
-    dashboardCell.queries = dashboardCell.queries.map(({
-      label,
-      query,
-      queryConfig,
-      db,
-    }) => ({
-      label,
-      query,
-      queryConfig,
-      db,
-      database: db,
-      text: query,
-    }))
+    dashboardCell.queries = dashboardCell.queries.map(
+      ({label, query, queryConfig, db}) => ({
+        label,
+        query,
+        queryConfig,
+        db,
+        database: db,
+        text: query,
+      })
+    )
     return dashboardCell
   })
 
@@ -62,6 +65,7 @@ const Dashboard = ({
           ? <LayoutRenderer
               templates={templatesIncludingDashTime}
               cells={cells}
+              timeRange={timeRange}
               autoRefresh={autoRefresh}
               source={source.links.proxy}
               onPositionChange={onPositionChange}
@@ -70,6 +74,7 @@ const Dashboard = ({
               onUpdateCell={onUpdateCell}
               onDeleteCell={onDeleteCell}
               onSummonOverlayTechnologies={onSummonOverlayTechnologies}
+              synchronizer={synchronizer}
             />
           : <div className="dashboard__empty">
               <p>This Dashboard has no Graphs</p>
@@ -104,7 +109,7 @@ Dashboard.propTypes = {
         ).isRequired,
       })
     ).isRequired,
-  }).isRequired,
+  }),
   templatesIncludingDashTime: arrayOf(shape()).isRequired,
   inPresentationMode: bool,
   onAddCell: func,
@@ -114,6 +119,7 @@ Dashboard.propTypes = {
   onUpdateCell: func,
   onDeleteCell: func,
   onSummonOverlayTechnologies: func,
+  synchronizer: func,
   source: shape({
     links: shape({
       proxy: string,

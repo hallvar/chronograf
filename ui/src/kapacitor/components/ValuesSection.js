@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import Dropdown from 'src/shared/components/Dropdown'
+import Dropdown from 'shared/components/Dropdown'
 import {Tab, TabList, TabPanels, TabPanel, Tabs} from 'shared/components/Tabs'
 import {OPERATORS, PERIODS, CHANGES, SHIFTS} from 'src/kapacitor/constants'
 import _ from 'lodash'
@@ -27,9 +27,9 @@ export const ValuesSection = React.createClass({
         <div className="rule-section--body">
           <Tabs initialIndex={initialIndex} onSelect={this.handleChooseTrigger}>
             <TabList isKapacitorTabs="true">
-              {TABS.map(tab => (
+              {TABS.map(tab =>
                 <Tab key={tab} isKapacitorTab={true}>{tab}</Tab>
-              ))}
+              )}
             </TabList>
 
             <TabPanels>

@@ -2,7 +2,7 @@ import React, {PropTypes, Component} from 'react'
 import onClickOutside from 'react-onclickoutside'
 
 import {formatRPDuration} from 'utils/formatting'
-import YesNoButtons from 'src/shared/components/YesNoButtons'
+import YesNoButtons from 'shared/components/YesNoButtons'
 import {DATABASE_TABLE} from 'src/admin/constants/tableSizing'
 
 class DatabaseRow extends Component {
